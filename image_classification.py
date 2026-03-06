@@ -1,0 +1,47 @@
+# image_classification.py
+# Project: Image Classification using Machine Learning
+# Author: Mahfoud Slimen
+
+from sklearn.datasets import load_digits
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
+
+# تحميل البيانات
+digits = load_digits()
+
+# تقسيم البيانات
+X = digits.data
+y = digits.target
+
+# تقسيم إلى تدريب واختبار
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# إنشاء النموذج
+model = SVC()
+
+# تدريب النموذج
+model.fit(X_train, y_train)
+
+# التنبؤ
+predictions = model.predict(X_test)
+
+# حساب الدقة
+accuracy = accuracy_score(y_test, predictions)
+print("Model Accuracy:", accuracy)
+
+# عرض بعض الصور مع التوقع
+for index in range(5):
+    image = X_test[index].reshape(8,8)
+    plt.imshow(image, cmap='gray')
+    plt.title(f"Predicted: {predictions[index]}")
+    plt.show()حساب الدقة
+
+accuracy = accuracy_score(y_test, predictions) print("Model Accuracy:", accuracy)
+
+عرض أول 5 صور مع التنبؤات
+
+for index in range(5): image = X_test[index].reshape(8,8) plt.imshow(image, cmap='gray') plt.title(f"Predicted: {predictions[index]}") plt.show()
